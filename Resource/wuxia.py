@@ -20,6 +20,11 @@ BookType = 'epub' # epub or txt
 
 HomeURL = 'https://www.ixdzs.com'
 
+#  1 玄幻·奇幻  2 修真·仙侠 3 都市·青春 4 历史·军事 5 网游·竞技 6 科幻·灵异 7 言情·穿越
+#  8 耽美·同人 12 侦探·推理 10 武侠小说 9 台言·古言11 古典文学 13 外国文学 
+# 14 当代现代 15 童话故事 16 传记纪实 17 韩流青春 18 影视文学 0 其他类别 
+
+# sort/后面的数字对应上面类别
 WUXIA = 'https://www.ixdzs.com/sort/1/index_0_0_0_{}.html' #10 -> 武侠 
 
 TestDetailUrl = 'https://www.ixdzs.com/d/153/153616/'
