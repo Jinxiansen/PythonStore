@@ -20,7 +20,9 @@ BookType = 'epub' # epub or txt
 
 HomeURL = 'https://www.ixdzs.com'
 
-WUXIA = 'https://www.ixdzs.com/sort/10/index_0_0_0_{}.html' #10 -> 武侠 
+WUXIA = 'https://www.ixdzs.com/sort/1/index_0_0_0_{}.html' #10 -> 武侠 
+
+TestDetailUrl = 'https://www.ixdzs.com/d/153/153616/'
 
 headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36"}
 
@@ -78,7 +80,7 @@ def mkDir(path):
 		return False
 
 def requestData(url):
-	html = requests.get(url,headers = headers,timeout = 1)
+	html = requests.get(url,headers = headers)
 	html.encoding='utf-8'
 	return html
 
@@ -86,6 +88,9 @@ def swiper(url):
 	html = requestData(url)
 	soup = BeautifulSoup(html.text,'lxml')
 	if soup is None: return
+
+	imgUrl = soup.find('div',class_='d_af fdl').find('img')['src']
+	print('图片地址：',imgUrl)
 
 	down = soup.find('div',id = '{}_down'.format(BookType))
 	if down is None: return
@@ -111,12 +116,20 @@ def swiper(url):
 
 	downUrl = HomeURL + last
 	print(title,' ',downUrl)
-	with closing(requests.get(downUrl, stream=True)) as response:
-    	# chunk_size = 1024
+
+	downLoad(imgUrl,title +'.jpg')
+
+	downLoad(downUrl,title + ft)
+
+
+def downLoad(url,title):
+	with closing(requests.get(url, stream=True)) as response:
 		content_size = int(response.headers['content-length'])
-		progress = ProgressBar(title, total=content_size,
-                                     unit="KB", chunk_size=1024, run_status="正在下载", fin_status="******下载完成*******************")
-		with open(title + ft , "wb") as file:
+		progress = ProgressBar(title, total=content_size,unit="KB", 
+			chunk_size=1024, 
+			# run_status="正在下载", 
+			fin_status="******下载完成*******************")
+		with open(title, "wb") as file:
 			for data in response.iter_content(chunk_size=1024):
 				file.write(data)
 				progress.refresh(count=len(data))
@@ -126,6 +139,10 @@ def parseURL(url):
 	soup = BeautifulSoup(html.text,'lxml')
 
 	all_class = soup.find_all(class_ = 'list_img')
+
+	if all_class.count == []:
+		print('已经爬完。')
+		sys.exit(0)
 
 	for c in all_class:
 		h = c.find('a')['href']
@@ -138,8 +155,9 @@ def parseURL(url):
 		parseURL(WUXIA.format(pageIndex))
 
 
-
+# 创建目录
 mkDir(BookType)
+
 parseURL(WUXIA.format(pageIndex))
 
 
