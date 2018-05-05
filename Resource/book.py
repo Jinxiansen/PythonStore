@@ -25,7 +25,7 @@ HomeURL = 'https://www.ixdzs.com'
 # 14 当代现代 15 童话故事 16 传记纪实 17 韩流青春 18 影视文学 0 其他类别 
 
 # sort/后面的数字对应上面类别
-WUXIA = 'https://www.ixdzs.com/sort/1/index_0_0_0_{}.html' #10 -> 武侠 
+WUXIA = 'https://www.ixdzs.com/sort/2/index_0_0_0_{}.html' #10 -> 武侠 
 
 TestDetailUrl = 'https://www.ixdzs.com/d/153/153616/'
 
@@ -145,8 +145,8 @@ def parseURL(url):
 
 	all_class = soup.find_all(class_ = 'list_img')
 
-	if all_class.count == []:
-		print('已经爬完。')
+	if all_class == []:
+		print('------------- 已经爬完 -----------------')
 		sys.exit(0)
 
 	for c in all_class:
