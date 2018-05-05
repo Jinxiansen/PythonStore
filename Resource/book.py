@@ -24,9 +24,14 @@ HomeURL = 'https://www.ixdzs.com'
 #  8 耽美·同人 12 侦探·推理 10 武侠小说 9 台言·古言11 古典文学 13 外国文学 
 # 14 当代现代 15 童话故事 16 传记纪实 17 韩流青春 18 影视文学 0 其他类别 
 
+bookList = ['其他类别','玄幻奇幻','修真仙侠','都市青春','历史军事',
+			'网游竞技','科幻灵异','言情穿越','耽美同人','台言古言',
+			'武侠小说','古典文学','侦探·推理','外国文学','当代现代',
+			'童话故事','传记纪实','韩流青春','影视文学']
+
 # sort/后面的数字对应上面类别
 
-classIndex = 10 # 比如 10 -> 武侠 
+classIndex = 2 # 比如 10 -> 武侠 
 XiaoShuoURL = 'https://www.ixdzs.com/sort/{}/index_0_0_0_{}.html' 
 
 TestDetailUrl = 'https://www.ixdzs.com/d/153/153616/'
@@ -161,7 +166,7 @@ def parseURL(url):
 		parseURL(XiaoShuoURL.format(classIndex,pageIndex))
 
 # 创建目录
-mkDir(BookType)
+mkDir(bookList[classIndex] + BookType)
 
 # 干~
 parseURL(XiaoShuoURL.format(classIndex,pageIndex))
