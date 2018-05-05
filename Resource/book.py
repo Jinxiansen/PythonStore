@@ -16,7 +16,7 @@ import json
 from contextlib import closing
 
 
-BookType = 'epub' # epub or txt
+BookType = 'epub' #可修改为 epub 或 txt
 
 HomeURL = 'https://www.ixdzs.com'
 
@@ -25,10 +25,11 @@ HomeURL = 'https://www.ixdzs.com'
 # 14 当代现代 15 童话故事 16 传记纪实 17 韩流青春 18 影视文学 0 其他类别 
 
 # sort/后面的数字对应上面类别
-WUXIA = 'https://www.ixdzs.com/sort/2/index_0_0_0_{}.html' #10 -> 武侠 
+
+classIndex = 10 # 比如 10 -> 武侠 
+XiaoShuoURL = 'https://www.ixdzs.com/sort/{}/index_0_0_0_{}.html' 
 
 TestDetailUrl = 'https://www.ixdzs.com/d/153/153616/'
-
 headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36"}
 
 pageIndex = 1
@@ -156,14 +157,13 @@ def parseURL(url):
 	else:
 		global pageIndex
 		pageIndex += 1
-		print('~~~~~~~~~~~~~~~~~~~~下载第{}页~~~~~~~~~~~~~~~~~~~~`'.format(pageIndex))
-		parseURL(WUXIA.format(pageIndex))
-
+		print('~~~~~~~~~~~~~~~~~~~~下载第{}页~~~~~~~~~~~~~~~~~~~~'.format(pageIndex))
+		parseURL(XiaoShuoURL.format(classIndex,pageIndex))
 
 # 创建目录
 mkDir(BookType)
 
-parseURL(WUXIA.format(pageIndex))
-
+# 干~
+parseURL(XiaoShuoURL.format(classIndex,pageIndex))
 
 
