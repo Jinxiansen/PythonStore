@@ -8,7 +8,7 @@
 requests 和 BeautifulSoup 等相关库
 
 #### 武侠小说 [https://www.ixdzs.com](https://www.ixdzs.com)
-
+* 可爬 `txt` 或 `epub` 类型
 * Clone 到本地，切到 Resource 目录下，运行 `python3 book.py` 
 
 ![](Image/book.png)
@@ -22,11 +22,7 @@ requests 和 BeautifulSoup 等相关库
 
 ![](Image/meizi.jpeg)
 
-
-
-
-
-
+ 
 
 
 
